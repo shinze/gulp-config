@@ -1,0 +1,28 @@
+{
+  "name": "gulp-config",
+  "version": "0.0.1",
+  "description": "My gulp config",
+  "author": "Gaetan Ark",
+  "license": "None",
+  "devDependencies": {
+    "bower": "latest",
+    "browser-sync": "latest",
+    "gulp": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-bower-files": "latest",
+    "gulp-htmlbuild": "latest",
+    "gulp-imagemin": "latest",
+    "gulp-jade": "latest",
+    "gulp-less": "latest",
+    "gulp-minify-css": "latest",
+    "gulp-notify": "latest",
+    "gulp-plumber": "latest",
+    "gulp-rename": "latest",
+    "gulp-util": "latest",
+    "gutil": "latest",
+    "imagemin-pngcrush": "latest",
+    "marked": "latest",
+    "path": "latest",
+    "supermarked": "latest"
+  }
+}
