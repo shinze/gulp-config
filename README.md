@@ -1,4 +1,4 @@
-# A gulp config for my everyday work
+# A gulp and bower config for my everyday work
 
 ## Installation
 
