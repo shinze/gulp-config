@@ -10,7 +10,6 @@ var gulp = require('gulp'),
 
     // Global tools
     browserSync = require('browser-sync'),
-    notify      = require('gulp-notify'),
     gutil       = require('gulp-util'),
     plumber     = require('gulp-plumber'),
     rename      = require("gulp-rename"),
@@ -69,7 +68,7 @@ gulp.task('server', function() {
 // 4. Minified
 // 5. Copied as style.min.css in ./build/assets/css
 // 6. Reload Browser sync
-// 7. Notify
+
 gulp.task('less', function () {
     return gulp.src('./src/less/style.less')
         .pipe(plumber())
