@@ -22,9 +22,6 @@ var gulp = require('gulp'),
     // For jade
     jade        = require('gulp-jade'),
 
-    // For Bowered files
-    gulpBowerFiles = require('gulp-bower-files'),
-
     // For image files
     imagemin = require('gulp-imagemin'),
     pngcrush = require('imagemin-pngcrush');
