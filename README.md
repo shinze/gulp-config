@@ -26,6 +26,10 @@ A PSD file can be found in `` ./src/favicons/HTML5-Boilerplate-Favicons.psd``.
 To create the favicons and touch icons for the project, open and *save for the web* the files in `./src/favicons`.
 
 
+## Javascript(s)
+
+You should prefer something like a CDN for your libs.
+My prefered solution for now : is [JSDeliver](http://www.jsdelivr.com/) and a [good article about that particular CDN](https://hacks.mozilla.org/2014/03/jsdelivr-the-advanced-open-source-public-cdn/).
 
 
 ## Everything else
