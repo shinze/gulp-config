@@ -41,3 +41,10 @@ Everything else is in `./src` and build in… `./build`.
 * [Less-css](http://www.lesscss.org) for your CSS.
 
 Images, CSS, JS assets will be in `.build/assets`.
+
+
+
+
+## Resources
+
+* https://blog.nodejitsu.com/npmawesome-9-gulp-plugins/
