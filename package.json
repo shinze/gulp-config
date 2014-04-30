@@ -28,6 +28,7 @@
     "gulp-plumber": "^0.6.1",
     "gulp-rename": "^1.2.0",
     "gulp-util": "^2.2.14",
+    "gulp-w3cjs": "^0.2.0",
     "gutil": "^1.0.6",
     "supermarked": "^1.1.0"
   }

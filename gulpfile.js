@@ -26,6 +26,9 @@ var gulp        = require('gulp'),
     // For jade
     jade        = require('gulp-jade'),
 
+    // HTML validation
+    htmlvalidator       = require('gulp-w3cjs'),
+
     // For image files
     changed = require('gulp-changed'),
     imagemin = require('gulp-imagemin');
@@ -51,6 +54,7 @@ var paths = {
 
 // The tasks
 // ------------------------------
+
 
 // Static server
 gulp.task('server', function() {
@@ -105,6 +109,13 @@ gulp.task('templates', function() {
 });
 
 
+// HTML validation
+gulp.task('htmlvalidator', function () {
+    return gulp.src(paths.html + '/*.html')
+        .pipe(htmlvalidator());
+});
+
+
 // Image files compression
 // 1. Compressing only modified pictures
 // 2. Compressed images to destination
@@ -140,9 +151,10 @@ gulp.task( 'watch', function () {
     gulp.watch( paths.less, ['less'] );
     gulp.watch( paths.images_src, ['images'] );
     gulp.watch( paths.jades, ['templates'] );
+    gulp.watch( paths.html, ['htmlvalidator'] );
 });
 
 
 
-gulp.task('default', ['server', 'images', 'templates', 'less', 'icons', 'touchicons', 'watch']);
+gulp.task('default', ['server', 'images', 'templates', 'less', 'icons', 'touchicons', 'htmlvalidator', 'watch']);
 
