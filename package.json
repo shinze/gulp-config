@@ -1,7 +1,7 @@
 {
   "name": "gulp-config",
   "version": "0.0.0",
-  "description": "## Installation",
+  "description": "A gulp conf",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,19 +17,18 @@
   },
   "homepage": "https://github.com/gaetanark/gulp-config",
   "devDependencies": {
-    "bower": "^1.3.3",
-    "browser-sync": "^0.8.2",
-    "gulp": "^3.6.2",
+    "bower": "^1.3.2",
+    "browser-sync": "^0.8.0",
+    "gulp": "^3.6.0",
     "gulp-autoprefixer": "0.0.7",
+    "gulp-changed": "^0.3.0",
     "gulp-imagemin": "^0.5.0",
     "gulp-jade": "^0.5.0",
     "gulp-less": "^1.2.3",
-    "gulp-minify-css": "^0.3.2",
     "gulp-plumber": "^0.6.1",
     "gulp-rename": "^1.2.0",
     "gulp-util": "^2.2.14",
     "gutil": "^1.0.6",
-    "imagemin-pngcrush": "^0.1.0",
     "supermarked": "^1.1.0"
   }
 }

@@ -5,26 +5,30 @@
 // TODO :
 // uncss it
 // Bower it
+// https://www.npmjs.org/package/gulp-w3cjs
 
-var gulp = require('gulp'),
+
+
+
+
+var gulp        = require('gulp'),
 
     // Global tools
     browserSync = require('browser-sync'),
     gutil       = require('gulp-util'),
     plumber     = require('gulp-plumber'),
-    rename      = require("gulp-rename"),
+    rename      = require('gulp-rename'),
 
     // For less-css files
     less        = require('gulp-less'),
     prefixer    = require('gulp-autoprefixer'),
-    minifycss   = require('gulp-minify-css'),
 
     // For jade
     jade        = require('gulp-jade'),
 
     // For image files
-    imagemin = require('gulp-imagemin'),
-    pngcrush = require('imagemin-pngcrush');
+    changed = require('gulp-changed'),
+    imagemin = require('gulp-imagemin');
 
 
 
@@ -34,10 +38,11 @@ var paths = {
     src         : './src',
     less        : './src/less/*.less',
     jades       : './src/*.jade',
-    images_src  : './src/images/*',
-    html        : './build/',
+    images_src  : './src/images/**/*',
+    html        : './build',
     css         : './build/assets/css',
-    images      : './build/assets/images'
+    images      : './build/assets/images',
+    icons       : './src/favicons'
 };
 
 
@@ -69,17 +74,26 @@ gulp.task('server', function() {
 gulp.task('less', function () {
     return gulp.src('./src/less/style.less')
         .pipe(plumber())
-        .pipe(less())
+        .pipe(less({}))
         .pipe(prefixer('last 5 versions', 'ie 8'))
         .pipe(gulp.dest(paths.css))
-        .pipe(minifycss())
+        .pipe(rename('style.css'))
+        .pipe(less({
+            compress: true
+        }))
         .pipe(rename('style.min.css'))
         .pipe(gulp.dest(paths.css))
         .pipe(browserSync.reload({stream:true}));
 });
 
 
+
+
 // Jade templates
+// 1. Jade processed with pretty outpu
+// 2. Copy generated file to html destination
+// 3. Reload BS
+
 gulp.task('templates', function() {
     return gulp.src(paths.jades)
         .pipe(plumber())
@@ -90,23 +104,45 @@ gulp.task('templates', function() {
         .pipe(browserSync.reload({stream:true}));
 });
 
+
 // Image files compression
+// 1. Compressing only modified pictures
+// 2. Compressed images to destination
+
 gulp.task('images', function () {
-    return gulp.src('src/images/*')
+    return gulp.src(paths.images_src)
+        .pipe(changed(paths.images))
         .pipe(imagemin({
-            progressive: true,
-            svgoPlugins: [{removeViewBox: false}],
-            use: [pngcrush()]
+            optimizationLevel: 5
         }))
         .pipe(gulp.dest(paths.images));
 });
 
+
+
+// Favicons and touch icons
+gulp.task('icons', function () {
+    return gulp.src(paths.icons + 'favicon.png')
+        .pipe(rename('favicon.ico'))
+        .pipe(gulp.dest(paths.build));
+});
+gulp.task('touchicons', function() {
+    return gulp.src(paths.icons + '/apple-touch*.png')
+        .pipe(imagemin({
+            optimizationLevel: 5
+        }))
+        .pipe(gulp.dest(paths.build));
+});
+
+
 // Watch modifications
 gulp.task( 'watch', function () {
     gulp.watch( paths.less, ['less'] );
-    gulp.watch( paths.images, ['images'] );
+    gulp.watch( paths.images_src, ['images'] );
     gulp.watch( paths.jades, ['templates'] );
 });
 
-gulp.task('default', ['server', 'images', 'templates', 'less', 'watch']);
+
+
+gulp.task('default', ['server', 'images', 'templates', 'less', 'icons', 'touchicons', 'watch']);
 
