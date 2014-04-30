@@ -35,4 +35,4 @@ Everything else is in `./src` and build in… `./build`.
 * [Jade](http://www.jade-lang.com) for your templating;
 * [Less-css](http://www.lesscss.org) for your CSS.
 
-Images, CSS, JS assets are in `.build/assets`.
+Images, CSS, JS assets will be in `.build/assets`.
