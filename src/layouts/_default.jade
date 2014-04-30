@@ -1,0 +1,15 @@
+doctype html
+html(lang="fr")
+  include default-partials/_html-header
+
+  body(class=nojs)
+    <!--[if lt IE 8]>
+    p.browsehappy
+      | You are using an <strong>outdated</strong> browser.
+      | Please <a href="http://browsehappy.com/">upgrade your browser</a>
+      | to improve your experience.
+    <![endif]-->
+
+    include default-partials/_header
+    block content
+    include default-partials/_footer
