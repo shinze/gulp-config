@@ -74,7 +74,7 @@ gulp.task('server', function() {
 gulp.task('less', function () {
     return gulp.src('./src/less/style.less')
         .pipe(plumber())
-        .pipe(less({}))
+        .pipe(less())
         .pipe(prefixer('last 5 versions', 'ie 8'))
         .pipe(gulp.dest(paths.css))
         .pipe(rename('style.css'))
