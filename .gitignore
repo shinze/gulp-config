@@ -1,4 +1,4 @@
 node_modules
 build
-src/libs
+src/vendors
 gulp
