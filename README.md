@@ -15,7 +15,8 @@ $ npm install
 ## Running
 
 ```
-$ gulp
+$ ln -s node_modules/gulp/bin/gulp.js gulp
+$ ./gulp
 ```
 
 
