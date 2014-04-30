@@ -18,6 +18,8 @@ var gulp        = require('gulp'),
     gutil       = require('gulp-util'),
     plumber     = require('gulp-plumber'),
     rename      = require('gulp-rename'),
+    clean       = require('gulp-clean'),
+    concat      = require('gulp-concat'),
 
     // For less-css files
     less        = require('gulp-less'),
@@ -34,15 +36,21 @@ var gulp        = require('gulp'),
 
 // Paths
 var paths = {
-    build       : './build',
-    src         : './src',
-    less        : './src/less/*.less',
-    jades       : './src/*.jade',
-    images_src  : './src/images/**/*',
-    html        : './build',
-    css         : './build/assets/css',
-    images      : './build/assets/images',
-    icons       : './src/favicons'
+    build               : './build',
+    src                 : './src',
+    less                : './src/less/*.less',
+    css_output          : 'style.css',
+    jades               : './src/*.jade',
+    js                  : './src/js/*.js',
+    js_output           : 'all.js',
+    js_vendor           : './src/js/vendor/*.js',
+    js_build            : './build/js/',
+    js_vendor_output    : 'vendor.js',
+    images_src          : './src/images/**/*',
+    html                : './build',
+    css                 : './build/assets/css',
+    images              : './build/assets/images',
+    icons               : './src/favicons'
 };
 
 
@@ -62,8 +70,15 @@ gulp.task('server', function() {
 });
 
 
+gulp.task('js_vendors', function() {
+  return gulp.src(paths.js_vendor)
+    .pipe(concat(paths.js_vendor_output))
+    .pipe(gulp.dest(paths.js_vendor_output))
+});
 
-// Less files
+
+// Tasks specs
+// 0. Cleaning before building
 // 1. Less processed
 // 2. Prefixed
 // 3. Copied as style.css in ./build/assets/css
@@ -71,8 +86,13 @@ gulp.task('server', function() {
 // 5. Copied as style.min.css in ./build/assets/css
 // 6. Reload Browser sync
 
+gulp.task('clean', function () {
+  return gulp.src(paths.build, {read: false})
+    .pipe(clean());
+});
+
 gulp.task('less', function () {
-    return gulp.src('./src/less/style.less')
+    return gulp.src(paths.less)
         .pipe(plumber())
         .pipe(less())
         .pipe(prefixer('last 5 versions', 'ie 8'))
@@ -144,5 +164,5 @@ gulp.task( 'watch', function () {
 
 
 
-gulp.task('default', ['server', 'images', 'templates', 'less', 'icons', 'touchicons', 'watch']);
+gulp.task('default', ['server', 'images', 'templates', 'clean', 'less', 'icons', 'touchicons', 'watch']);
 
