@@ -1,0 +1,12 @@
+doctype html
+//if IE 8
+    <html class="lt-ie9">
+// [if gt IE 8] <!
+html(lang="fr", class="nojs")
+  // <![endif]
+  include ./default-partials/_html-header
+
+  body
+    include default-partials/_header
+    block content
+    include default-partials/_footer

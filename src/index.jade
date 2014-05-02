@@ -1,64 +1,13 @@
-doctype html
-html(lang="fr")
-  head
-    meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    title Ready to start !
-    meta(name='description', content='')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel="stylesheet", type="text/css", href="assets/css/style.min.css")
-    //-script(src='javascripts/vendor/modernizr-2.7.1.min.js')
+extends ./layouts/_default
 
-    //- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices
-    link(rel="apple-touch-icon-precomposed", href="apple-touch-icon-precomposed.png")
-    //- For the iPad mini and the first- and second-generation iPad on iOS ≤ 6:
-    link(rel="apple-touch-icon-precomposed", sizes="72x72", href="apple-touch-icon-72x72-precomposed.png")
-    //- For the iPad mini and the first- and second-generation iPad on iOS ≥ 7:
-    link(rel="apple-touch-icon-precomposed", sizes="76x76", href="apple-touch-icon-76x76-precomposed.png")
-    //- For iPhone with high-resolution Retina display running iOS ≤ 6:
-    link(rel="apple-touch-icon-precomposed", sizes="114x114", href="apple-touch-icon-114x114-precomposed.png")
-    //- For iPhone with high-resolution Retina display running iOS ≥ 7:
-    link(rel="apple-touch-icon-precomposed", sizes="120x120", href="apple-touch-icon-120x120-precomposed.png")
-    //- For iPad with high-resolution Retina display running iOS ≤ 6:
-    link(rel="apple-touch-icon-precomposed", sizes="144x144", href="apple-touch-icon-144x144-precomposed.png")
-    //- For iPad with high-resolution Retina display running iOS ≥ 7:
-    link(rel="apple-touch-icon-precomposed", sizes="152x152", href="apple-touch-icon-152x152-precomposed.png")
-    //- Chrome v31+ for Android
-    link(rel="icon", sizes="196x196", href="apple-touch-icon.png")
+block content
+
+        p This is a sample starter page. To modify it go to `./src/index.jade` and enjoy.
+
+        p The less files are in `./src/less`
+
+        p The js files &amp; vendors are in `./src/js`
+
+        p The source images files can be dropped in `./src/images` and will be compressed and copied to `./build/assets/images`.
 
 
-  body
-    <!--[if lt IE 8]>
-    p.browsehappy
-      | You are using an <strong>outdated</strong> browser.
-      | Please <a href="http://browsehappy.com/">upgrade your browser</a>
-      | to improve your experience.
-    <![endif]-->
-
-
-    :markdown
-
-        # Hello page is here, ready to gulp
-
-        Is it your first travel to Gulp land ?
-
-        This is a sample starter page. To modify it go to `/src/index.jade` and enjoy.
-
-        The less files are in `/src/less`
-
-        The source images files can be dropped in `src/images` and will be compressed and copied to `/build/assets/images`.
-
-    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
-    script window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.11.0.min.js"><\/script>')
-    //-script(src='assets/js/plugins.js')
-    //-script(src='assets/js/script.js')
-
-    //- Google Analytics: change UA-XXXXX-X to be your site's ID.
-    //-
-      script
-        (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-        e.src='//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-        ga('create','UA-XXXXX-X');ga('send','pageview');
