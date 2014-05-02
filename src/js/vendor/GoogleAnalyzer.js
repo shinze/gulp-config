@@ -1,6 +1,6 @@
 /**
  * Google Analytics reltaed helper
- * Author : LesPolypodes.com 
+ * Author : LesPolypodes.com
  * License : MIT
  * Disclaimer: This depends on jQuery
  */
@@ -27,7 +27,7 @@ var GoogleAnalyzer = function(){
     }
 
     /**
-     * Send outblound event to GA server using API
+     * Send outbound event to GA server using API
      */
     var trackOutboundLink = function(ev) {
         _gaq.push(["_trackEvent", "Outgoing Links", this.href, document.location.pathname + document.location.search]);

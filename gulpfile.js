@@ -20,6 +20,9 @@ var gulp        = require('gulp'),
     rename      = require('gulp-rename'),
     clean       = require('gulp-clean'),
     concat      = require('gulp-concat'),
+    filesize    = require('gulp-filesize'),
+    uglify      = require('gulp-uglify'),
+
 
     // For less-css files
     less        = require('gulp-less'),
@@ -44,10 +47,10 @@ var paths = {
     js                  : './src/js/*.js',
     js_output           : 'all.js',
     js_vendor           : './src/js/vendor/*.js',
-    js_build            : './build/js/',
+    js_build            : './build/assets/js',
     js_vendor_output    : 'vendor.js',
+    js_vendor_min_output: 'vendor.min.js',
     images_src          : './src/images/**/*',
-    html                : './build',
     css                 : './build/assets/css',
     images              : './build/assets/images',
     icons               : './src/favicons'
@@ -70,13 +73,6 @@ gulp.task('server', function() {
 });
 
 
-gulp.task('js_vendors', function() {
-  return gulp.src(paths.js_vendor)
-    .pipe(concat(paths.js_vendor_output))
-    .pipe(gulp.dest(paths.js_vendor_output))
-});
-
-
 // Tasks specs
 // 0. Cleaning before building
 // 1. Less processed
@@ -87,7 +83,7 @@ gulp.task('js_vendors', function() {
 // 6. Reload Browser sync
 
 gulp.task('clean', function () {
-  return gulp.src(paths.build, {read: false})
+  return gulp.src(paths.build + '/*', {read: false})
     .pipe(clean());
 });
 
@@ -107,6 +103,19 @@ gulp.task('less', function () {
 });
 
 
+gulp.task('js_vendor', function() {
+    return gulp.src(paths.js_vendor)
+    .pipe(concat(paths.js_vendor_output))
+    .pipe(gulp.dest(paths.js_build))
+    //.pipe(filesize())
+    .pipe(uglify())
+    .pipe(rename(paths.js_vendor.min_output))
+    .pipe(gulp.dest(paths.js_build))
+    //.pipe(filesize())
+    .on('error', gutil.log)
+});
+
+
 
 
 // Jade templates
@@ -120,7 +129,7 @@ gulp.task('templates', function() {
         .pipe(jade({
             pretty : true
         }))
-        .pipe(gulp.dest(paths.html))
+        .pipe(gulp.dest(paths.build))
         .pipe(browserSync.reload({stream:true}));
 });
 
@@ -164,5 +173,6 @@ gulp.task( 'watch', function () {
 
 
 
-gulp.task('default', ['server', 'images', 'templates', 'clean', 'less', 'icons', 'touchicons', 'watch']);
+gulp.task('default', ['clean', 'server', 'images', 'templates', 'less', 'js_vendor', 'icons', 'touchicons', 'watch']);
+gulp.task('ronan', ['clean', 'images', 'templates', 'less', 'js_vendor', 'icons', 'touchicons']);
 
