@@ -44,12 +44,15 @@ var paths = {
     less                : './src/less/*.less',
     css_output          : 'style.css',
     jades               : './src/*.jade',
-    js                  : './src/js/*.js',
-    js_output           : 'all.js',
-    js_vendor           : './src/js/vendor/*.js',
-    js_build            : './build/assets/js',
-    js_vendor_output    : 'vendor.js',
-    js_vendor_min_output: 'vendor.min.js',
+    js                  : {
+      files             : './src/js/*.js',
+      output            : 'main.min.js',
+      build             : './build/assets/js',
+      vendors           : {
+        files             : './src/js/vendor/*.js',
+        output            : 'vendors.min.js'
+      }
+    },
     images_src          : './src/images/**/*',
     css                 : './build/assets/css',
     images              : './build/assets/images',
@@ -102,16 +105,21 @@ gulp.task('less', function () {
         .pipe(browserSync.reload({stream:true}));
 });
 
+gulp.task('js', function() {
+    return gulp.src(paths.js.files)
+    .pipe(uglify()) // = concat+ugly
+    .pipe(rename(paths.js.output))
+    .pipe(gulp.dest(paths.js.build))
+    .pipe(filesize())
+    .on('error', gutil.log)
+});
 
 gulp.task('js_vendor', function() {
-    return gulp.src(paths.js_vendor)
-    .pipe(concat(paths.js_vendor_output))
-    .pipe(gulp.dest(paths.js_build))
-    //.pipe(filesize())
-    .pipe(uglify())
-    .pipe(rename(paths.js_vendor.min_output))
-    .pipe(gulp.dest(paths.js_build))
-    //.pipe(filesize())
+    return gulp.src(paths.js.vendors.files)
+    .pipe(uglify()) // = concat+ugly
+    .pipe(rename(paths.js.vendors.output))
+    .pipe(gulp.dest(paths.js.build))
+    .pipe(filesize())
     .on('error', gutil.log)
 });
 
@@ -173,6 +181,5 @@ gulp.task( 'watch', function () {
 
 
 
-gulp.task('default', ['clean', 'server', 'images', 'templates', 'less', 'js_vendor', 'icons', 'touchicons', 'watch']);
-gulp.task('ronan', ['clean', 'images', 'templates', 'less', 'js_vendor', 'icons', 'touchicons']);
+gulp.task('default', ['clean', 'server', 'images', 'templates', 'less', 'js', 'js_vendor', 'icons', 'touchicons', 'watch']);
 
