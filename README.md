@@ -2,22 +2,35 @@
 
 
 
-## Installation
+## Install and get it to run
 
-Install via [npm](https://www.npmjs.org/).
+### 1. Install [Gulp](http://gulpjs.com/) globally :
+
+```
+$ npm install -g gulp
+```
+
+### 2. Project installation made via [npm](https://www.npmjs.org/).
 
 ```
 $ npm install
 ```
 
+### 3. Running Gulp
 
-
-## Running
+The *default* task for Grunt.
 
 ```
-$ ln -s node_modules/gulp/bin/gulp.js gulp
-$ ./gulp
+$ gulp
 ```
+
+If you want a detail of every tasks avalaible
+
+```
+$ gulp -T
+```
+
+
 
 
 
@@ -41,12 +54,12 @@ My prefered solution for now : is [JSDeliver](http://www.jsdelivr.com/) and a [g
 
 Everything else is in `./src` and build in… `./build`.
 
+* `./build` ** is the project’s *served root*. **
+* `./src` ** is the project’s *source files* root. **
 * [Jade](http://www.jade-lang.com) for your templating;
 * [Less-css](http://www.lesscss.org) for your CSS.
 
-Images, CSS, JS assets will be in `.build/assets`.
-
-
+Images, CSS, JS assets will be compressed and published in `.build/assets`.
 
 
 ## Resources
