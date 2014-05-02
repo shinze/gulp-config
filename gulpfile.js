@@ -18,6 +18,11 @@ var gulp        = require('gulp'),
     gutil       = require('gulp-util'),
     plumber     = require('gulp-plumber'),
     rename      = require('gulp-rename'),
+    clean       = require('gulp-clean'),
+    concat      = require('gulp-concat'),
+    filesize    = require('gulp-filesize'),
+    uglify      = require('gulp-uglify'),
+
 
     // For less-css files
     less        = require('gulp-less'),
@@ -37,15 +42,24 @@ var gulp        = require('gulp'),
 
 // Paths
 var paths = {
-    build       : './build',
-    src         : './src',
-    less        : './src/less/*.less',
-    jades       : './src/*.jade',
-    images_src  : './src/images/**/*',
-    html        : './build',
-    css         : './build/assets/css',
-    images      : './build/assets/images',
-    icons       : './src/favicons'
+    build               : './build',
+    src                 : './src',
+    less                : './src/less/*.less',
+    css_output          : 'style.css',
+    jades               : './src/*.jade',
+    js                  : {
+      files             : './src/js/*.js',
+      output            : 'main.min.js',
+      build             : './build/assets/js',
+      vendors           : {
+        files             : './src/js/vendor/*.js',
+        output            : 'vendors.min.js'
+      }
+    },
+    images_src          : './src/images/**/*',
+    css                 : './build/assets/css',
+    images              : './build/assets/images',
+    icons               : './src/favicons'
 };
 
 
@@ -66,8 +80,8 @@ gulp.task('server', function() {
 });
 
 
-
-// Less files
+// Tasks specs
+// 0. Cleaning before building
 // 1. Less processed
 // 2. Prefixed
 // 3. Copied as style.css in ./build/assets/css
@@ -75,8 +89,13 @@ gulp.task('server', function() {
 // 5. Copied as style.min.css in ./build/assets/css
 // 6. Reload Browser sync
 
+gulp.task('clean', function () {
+  return gulp.src(paths.build + '/*', {read: false})
+    .pipe(clean());
+});
+
 gulp.task('less', function () {
-    return gulp.src('./src/less/style.less')
+    return gulp.src(paths.less)
         .pipe(plumber())
         .pipe(less())
         .pipe(prefixer('last 5 versions', 'ie 8'))
@@ -88,6 +107,24 @@ gulp.task('less', function () {
         .pipe(rename('style.min.css'))
         .pipe(gulp.dest(paths.css))
         .pipe(browserSync.reload({stream:true}));
+});
+
+gulp.task('js', function() {
+    return gulp.src(paths.js.files)
+    .pipe(uglify()) // = concat+ugly
+    .pipe(rename(paths.js.output))
+    .pipe(gulp.dest(paths.js.build))
+    .pipe(filesize())
+    .on('error', gutil.log)
+});
+
+gulp.task('js_vendor', function() {
+    return gulp.src(paths.js.vendors.files)
+    .pipe(uglify()) // = concat+ugly
+    .pipe(rename(paths.js.vendors.output))
+    .pipe(gulp.dest(paths.js.build))
+    .pipe(filesize())
+    .on('error', gutil.log)
 });
 
 
@@ -104,7 +141,7 @@ gulp.task('templates', function() {
         .pipe(jade({
             pretty : true
         }))
-        .pipe(gulp.dest(paths.html))
+        .pipe(gulp.dest(paths.build))
         .pipe(browserSync.reload({stream:true}));
 });
 
@@ -154,7 +191,5 @@ gulp.task( 'watch', function () {
     gulp.watch( paths.html, ['htmlvalidator'] );
 });
 
-
-
-gulp.task('default', ['server', 'images', 'templates', 'less', 'icons', 'touchicons', 'htmlvalidator', 'watch']);
+gulp.task('default', ['clean', 'server', 'images', 'templates', 'less', 'js', 'js_vendor', 'icons', 'touchicons', 'htmlvalidator', 'watch']);
 

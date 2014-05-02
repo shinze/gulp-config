@@ -1,8 +1,9 @@
 footer
 
-script(src='//cdn.jsdelivr.net/g/jquery')
+script(src='//cdn.jsdelivr.net/g/jquery,requirejs')
 script window.jQuery || document.write('<script src="assets/js/jquery.min.js"><\/script>')
-script(src='assets/js/script.js')
+script(src='assets/js/vendors.min.js')
+script(src='assets/js/main.min.js')
 
 //- Google Analytics: change UA-XXXXX-X to be your site's ID.
 //-
@@ -13,3 +14,4 @@ script(src='assets/js/script.js')
     e.src='//www.google-analytics.com/analytics.js';
     r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
     ga('create','UA-XXXXX-X');ga('send','pageview');
+
