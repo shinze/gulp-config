@@ -21,16 +21,20 @@ $ ./gulp
 
 
 
-## The most important ! Favicons and touch icons
+## The most important ! <small>Favicons and touch icons</small>
 
 A PSD file can be found in `` ./src/favicons/HTML5-Boilerplate-Favicons.psd``.
 To create the favicons and touch icons for the project, open and *save for the web* the files in `./src/favicons`.
+
+
 
 
 ## Javascript(s)
 
 You should prefer something like a CDN for your libs.
 My prefered solution for now : is [JSDeliver](http://www.jsdelivr.com/) and a [good article about that particular CDN](https://hacks.mozilla.org/2014/03/jsdelivr-the-advanced-open-source-public-cdn/).
+
+
 
 
 ## Everything else
@@ -46,5 +50,8 @@ Images, CSS, JS assets will be in `.build/assets`.
 
 
 ## Resources
-
-* https://blog.nodejitsu.com/npmawesome-9-gulp-plugins/
+* [Learn LessCSS](http://lesscss.org/#getting-started);
+* [Learn Jade](https://github.com/polypodes/Learn/blob/master/FrontEnd.md#jade-is-not-defined);
+* The Favicon template source : [Drublic.de](http://drublic.de/blog/html5-boilerplate-favicons-psd-template/);
+* The source of Everything : [HTML5BoilerPlate](https://github.com/h5bp/html5-boilerplate);
+* About [Gulp and JS](https://blog.nodejitsu.com/npmawesome-9-gulp-plugins/).
