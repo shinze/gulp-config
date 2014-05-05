@@ -46,7 +46,12 @@ var paths = {
     src                 : './src',
     less                : './src/less/*.less',
     css_output          : 'style.css',
-    jades               : './src/*.jade',
+    jades               : {
+        src               :'./src/*.jade',
+        watch             :'./src/**/*.jade',
+        dest              : './build'
+
+    },
     js                  : {
       files             : './src/js/*.js',
       output            : 'main.min.js',
@@ -136,12 +141,12 @@ gulp.task('js_vendor', function() {
 // 3. Reload BS
 
 gulp.task('templates', function() {
-    return gulp.src(paths.jades)
+    return gulp.src(paths.jades.src)
         .pipe(plumber())
         .pipe(jade({
             pretty : true
         }))
-        .pipe(gulp.dest(paths.build))
+        .pipe(gulp.dest(paths.jades.dest))
         .pipe(browserSync.reload({stream:true}));
 });
 
@@ -187,7 +192,7 @@ gulp.task('touchicons', function() {
 gulp.task( 'watch', function () {
     gulp.watch( paths.less, ['less'] );
     gulp.watch( paths.images_src, ['images'] );
-    gulp.watch( paths.jades, ['templates'] );
+    gulp.watch( paths.jades.watch, ['templates'] );
     gulp.watch( paths.html, ['htmlvalidator'] );
 });
 
