@@ -136,7 +136,7 @@ gulp.task('js_vendor', function() {
 
 
 // Jade templates
-// 1. Jade processed with pretty outpu
+// 1. Jade processed with pretty output
 // 2. Copy generated file to html destination
 // 3. Reload BS
 
