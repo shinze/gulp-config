@@ -18,7 +18,7 @@ $ npm install
 
 ### 3. Running Gulp
 
-The *default* task for Grunt.
+The *default* task for Gulp.
 
 ```
 $ gulp
