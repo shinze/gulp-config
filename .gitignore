@@ -1,4 +1,6 @@
+*.html
 node_modules
 build
 src/vendors
 gulp
+assets

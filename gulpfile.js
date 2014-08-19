@@ -35,32 +35,32 @@ var gulp = require('gulp'),
 // Paths
 var paths = {
     base               : './',
-    build               : './assets',
+    build               : './build',
     src                 : './src',
     js                  : {
         files               : ['./src/js/vendor/*.js','./src/js/*.js'],
         output_min          : 'main.min.js',
-        dest                : './assets/js',
+        dest                : './build/assets/js',
     },
     style               : {
         files               : ['./src/less/*.less', '!./src/less/_*.less'],
         watch               : './src/less/*.less',
         output              : 'style.css',
         output_min          : 'style.min.css',
-        dest                : './assets/css'
+        dest                : './build/assets/css'
     },
     layout                : {
         files               : './src/*.jade',
         watch               : './src/**/*.jade',
-        dest                : './'
+        dest                : './build'
     },
     validator           : {
-        watchables:         './*.html',
+        watchables          : './build/*.html',
     },
     images              : {
         files               : './src/images/**/*',
         icons               : './src/favicons',
-        dest                : './assets/images'
+        dest                : './build/assets/images'
     },
 
 };
@@ -68,12 +68,16 @@ var paths = {
 // The tasks
 // ------------------------------
 
+// A debug thing for me
+gulp.task('debug', function() {
+    process.stdout.write(paths.js.files);
+});
 
 // Static server
 gulp.task('server', function() {
     browserSync.init(null, {
         server: {
-            baseDir: './'
+            baseDir: paths.build
         }
     });
 });
@@ -84,13 +88,13 @@ gulp.task('server', function() {
 // 0. Cleaning before building
 // 1. Less processed
 // 2. Prefixed
-// 3. Copied as style.css in ./assets/css
+// 3. Copied as style.css in ./build/assets/css
 // 4. Minified
-// 5. Copied as style.min.css in ./assets/css
+// 5. Copied as style.min.css in ./build/assets/css
 // 6. Reload Browser sync
 
 gulp.task('clean', function () {
-    return gulp.src(paths.js.build + '/*', {read: false})
+    return gulp.src(paths.js.dest + '/*', {read: false})
     .pipe(clean());
 });
 
@@ -101,9 +105,9 @@ gulp.task('style', function () {
     .pipe(prefixer('last 5 versions', 'ie 8'))
     .pipe(gulp.dest(paths.style.dest))
     .pipe(rename(paths.style.output))
-    .pipe(uncss({
-        html: ['index.html']
-    }))
+    // .pipe(uncss({
+    //     html: ['index.html']
+    // }))
     .pipe(less({ compress: true }))
     .pipe(rename(paths.style.output_min))
     .pipe(gulp.dest(paths.style.dest))
@@ -121,6 +125,8 @@ gulp.task('js', function() {
     .pipe(browserSync.reload({stream:true}));
 });
 
+
+
 // Jade templates
 // 1. Jade processed with pretty output
 // 2. Copy generated file to html destination
@@ -130,7 +136,7 @@ gulp.task('templates', function() {
     return gulp.src(paths.layout.files)
     .pipe(plumber())
     .pipe(jade({pretty : true}))
-    .pipe(gulp.dest(paths.base))
+    .pipe(gulp.dest(paths.build))
     .pipe(browserSync.reload({stream:true}));
 });
 

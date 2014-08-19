@@ -24,7 +24,7 @@ The *default* task for Gulp.
 $ gulp
 ```
 
-If you want a detail of every tasks avalaible
+If you want a detailed view of every tasks avalaible
 
 ```
 $ gulp -T
