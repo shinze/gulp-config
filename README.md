@@ -1,6 +1,8 @@
 # A gulp and bower config for my everyday work
 
-
+------------------------
+Deprecated
+------------------------
 
 ## Install and get it to run
 
